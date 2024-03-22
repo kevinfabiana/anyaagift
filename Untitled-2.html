@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Angka 14 ke 15</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: rgb(207, 110, 246);
+    }
+
+    #container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+    #paper {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        background-color: rgba(255, 255, 255, 0.55); /* Transparansi 45% */
+        border: 1px solid #ccc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 72px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        transition: transform 1s ease, opacity 0.5s ease;
+        border-radius: 20px; /* Melengkungkan pinggiran */
+        font-family: 'Roboto', sans-serif; /* Menggunakan font Roboto */
+    }
+
+    #paper.hidden {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    #paper:after {
+        content: '15';
+        position: absolute;
+        font-size: 72px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        font-family: 'Roboto', sans-serif; /* Menggunakan font Roboto */
+        color: rgb(206, 129, 245); /* Warna angka pink */
+    }
+
+    #paper.visible:after {
+        opacity: 1;
+    }
+</style>
+</head>
+<body>
+<div id="container">
+    <div id="paper">14</div>
+</div>
+
+<script>
+    // Mengubah angka 14 ke 15 dengan animasi
+    setTimeout(function() {
+        var paper = document.getElementById('paper');
+        paper.classList.add('hidden');
+
+        setTimeout(function() {
+            paper.innerHTML = ''; // Menghapus angka 14
+            paper.classList.remove('hidden');
+            paper.classList.add('visible');
+
+            // Fade out kertas setelah selesai animasi
+            setTimeout(function() {
+                paper.style.transition = 'opacity 2s ease';
+                paper.style.opacity = 0;
+            }, 1500);
+
+            // Redirect ke flower.html setelah selesai animasi
+            setTimeout(function() {
+                window.location.href = 'flower.html';
+            }, 3000);
+        }, 1000);
+    }, 1000);
+</script>
+</body>
+</html>

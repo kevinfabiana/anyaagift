@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Halaman Sederhana</title>
+<style>
+  body {
+    font-family: 'SF UI Display', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgb(207, 110, 246);
+    text-align: center;
+    padding-top: 100px;
+    overflow: hidden; /* Menambahkan overflow: hidden untuk memastikan debu tidak muncul di luar halaman */
+    position: relative; /* Menambahkan posisi relatif untuk kontainer debu */
+  }
+  
+  .text-animation {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: .15em solid rgb(253, 94, 253);
+    animation: typing 4s steps(39, end) forwards; 
+    color: pink; 
+    overflow: hidden; 
+    max-width: 600px;
+  }
+  
+  .second-text-animation {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    opacity: 0; /* membuat teks kedua tidak terlihat secara default */
+    animation: fadeIn 1s 4s forwards; /* animasi muncul setelah 4 detik */
+    color: pink; /* mengatur warna font menjadi pink */
+  }
+  
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Animasi debu */
+  @keyframes dust {
+    0% {
+      transform: translateY(100vh) rotate(0deg) scale(0.5);
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-100%) rotate(360deg) scale(0.5);
+      opacity: 0;
+    }
+  }
+
+  .dust-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .dust {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: #fff;
+    opacity: 0.5;
+    border-radius: 50%;
+    animation: dust 15s linear infinite;
+  }
+
+  /* Tombol styling */
+  .button {
+    background-color: pink;
+    color: purple;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    opacity: 0; /* tombol tidak terlihat secara default */
+    animation: fadeInButton 1s 7s forwards; /* animasi muncul setelah 7 detik */
+  }
+
+  /* Animasi untuk munculnya tombol */
+  @keyframes fadeInButton {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=SF+UI+Display:wght@600&display=swap">
+</head>
+<body>
+  <div>
+    <h1 style="font-weight: 600;"><span class="text-animation">Maaf kalau web nya masih simple banget</span></h1>
+    <h1 style="font-weight: 600;"><span class="second-text-animation">Aku mah masih pemula🙏...</span></h1>
+    <button class="button" onclick="window.location.href='index.html'">Ulangi</button>
+  </div>
+  <div class="dust-container">
+    <!-- Debu akan ditambahkan secara dinamis menggunakan JavaScript -->
+  </div>
+
+  <script>
+    // Fungsi untuk membuat elemen debu secara dinamis
+    function createDust() {
+      const dustContainer = document.querySelector('.dust-container');
+      const dustCount = 100; // Jumlah debu yang ingin ditampilkan
+
+      for (let i = 0; i < dustCount; i++) {
+        const dust = document.createElement("div");
+        dust.className = "dust";
+        dust.style.left = Math.random() * window.innerWidth + "px";
+        dust.style.animationDelay = Math.random() * 15 + "s"; // Menentukan keterlambatan animasi debu
+        dustContainer.appendChild(dust);
+      }
+    }
+
+    // Panggil fungsi untuk membuat debu saat halaman dimuat
+    window.onload = createDust;
+  </script>
+</body>
+</html>

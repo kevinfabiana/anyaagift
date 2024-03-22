@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'San Francisco', Arial, sans-serif; /* Menggunakan font San Francisco */
+            background: rgb(207, 110, 246);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;  
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative; /* Menambahkan posisi relatif untuk kontainer debu */
+        }
+
+        .polaroid-container {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+            margin-bottom: 2cm;
+            position: relative;
+        }
+
+        .polaroid {
+            background-color: #fff;
+            border: 5px solid rgba(0, 0, 0, 0.1);
+            border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+            border-radius: 9px;
+            overflow: hidden;
+            width: 190px;
+            margin-right: 1cm;
+            padding: 9px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transform: translateY(100vh);
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards, spreadOut 2s ease-out forwards;
+        }
+
+        .polaroid img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes spreadOut {
+            to {
+                transform: translateY(0) scale(1);
+            }
+        }
+        .typing-animation {
+            position: absolute;
+            bottom: 40px; /* Menyesuaikan posisi tulisan sedikit naik */
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            font-size: 28px;
+            font-weight: 600; /* Menambahkan ketebalan font */
+            color:rgb(229, 156, 255);
+            animation: typing 5s steps(60, end);
+            display: inline-block;
+            text-align: center;
+            overflow: hidden; /* Menambahkan properti overflow: hidden; */
+            max-width: 700px; /* Menetapkan lebar maksimal untuk elemen teks */
+        }
+
+        @keyframes typing {
+            from {
+                width: 0
+            }
+            to {
+                width: 100%
+            }
+        }
+
+        /* Style untuk tombol */
+        .bottom-left-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: #f375e9;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Animasi debu */
+        @keyframes dust {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.5);
+                opacity: 0.5;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100%) rotate(360deg) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        .dust-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .dust {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: #fff;
+            opacity: 0.5;
+            border-radius: 50%;
+            animation: dust 15s linear infinite;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=San+Francisco&display=swap" rel="stylesheet"> <!-- Mengambil font San Francisco dari Google Fonts -->
+    <title>Polaroid Photo Card</title>
+</head>
+<body>
+    <div class="polaroid-container">
+        <div class="polaroid">
+            <img src="aes1.jpg" alt="Polaroid Photo 1">
+        </div>
+        <div class="polaroid">
+            <img src="aes2.jpg" alt="Polaroid Photo 2">
+        </div>
+
+        <div class="polaroid">
+            <img src="aes3.jpg" alt="Polaroid Photo 4">
+        </div>
+        <div class="polaroid">
+            <img src="aes4.jpg" alt="Polaroid Photo 5">
+        </div>
+    </div>
+    <div class="typing-animation">
+        <span>semogaaa anyaa makin lucuu, cantik, dann pinterrrr!!</span>
+    </div>
+    <div class="dust-container">
+        <!-- Debu akan ditambahkan secara dinamis menggunakan JavaScript -->
+    </div>
+
+    <!-- Tombol untuk melanjutkan -->
+    <a href="Untitled-3.html" class="bottom-left-button">Lanjutkan</a>
+
+    <script>
+        // Fungsi untuk membuat elemen debu secara dinamis
+        function createDust() {
+            const dustContainer = document.querySelector('.dust-container');
+            const dustCount = 50; // Jumlah debu yang ingin ditampilkan
+
+            for (let i = 0; i < dustCount; i++) {
+                const dust = document.createElement("div");
+                dust.className = "dust";
+                dust.style.left = Math.random() * window.innerWidth + "px";
+                dust.style.animationDelay = Math.random() * 15 + "s"; // Menentukan keterlambatan animasi debu
+                dustContainer.appendChild(dust);
+            }
+        }
+
+        // Panggil fungsi untuk membuat debu saat halaman dimuat
+        window.onload = createDust;
+    </script>
+</body>
+</html>

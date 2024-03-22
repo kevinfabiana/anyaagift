@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;1,900&display=swap');
+*{
+    font-family: 'times new roman',cursive;
+}
+body{
+    color: azure;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(217, 36, 196);
+}
+.happy-birthday {
+  position: fixed;
+  top: 50%;
+  right: 20px; /* Jarak dari sisi kanan */
+  transform: translateY(-50%);
+}
+
+.happy-birthday svg text {
+  font-size: 30px; /* Ukuran tulisan */
+  fill: transparent; /* Warna isi teks transparan */
+  stroke: rgb(217, 4, 4); /* Warna tepi teks */
+  stroke-width: 2px; /* Lebar tepi teks */
+  stroke-dasharray: 500;
+  stroke-dashoffset: 500;
+  animation: draw 5s ease forwards;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+
+.greetings{
+  height: 100vh;
+  
+  display: grid;
+  place-items: center;
+}
+.greetings > span{
+    width: 14ch;
+    animation: typing 2s steps(19);
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid;
+    font-family: poppins;
+    font-size: 2em;
+} 
+@keyframes typing {
+    from {
+      width: 0
+    }
+  }
+      
+  @keyframes blink {
+    50% {
+      border-color: transparent
+    }
+}
+
+
+  
+
+

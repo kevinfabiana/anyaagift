@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animated Typing Text and Video</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        position: relative; /* Menjadikan posisi relatif untuk menentukan posisi absolut tombol */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: rgb(207, 110, 246);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+        overflow: hidden; /* Menambahkan overflow: hidden untuk memastikan debu tidak muncul di luar halaman */
+    }
+    #typing-text {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 24px;
+        overflow: hidden;
+        white-space: nowrap;
+        animation: typing 2s steps(20) forwards;
+        overflow: hidden; /* Menambahkan properti overflow: hidden; */
+        max-width: 200px;
+        font-weight: 500; /* Menggunakan ketebalan font yang lebih besar */
+        font-style: normal; /* Menghapus gaya miring pada font */
+        color: pink; /* Mengatur warna font menjadi pink */
+    }
+    @keyframes typing {
+        0% {
+            width: 0;
+        }
+        100% {
+            width: 240px;
+        }
+    }
+    video {
+        max-width: 40%; /* Mengurangi lebar video */
+        position: absolute;
+        top: 50%; /* Menyesuaikan posisi ke atas */
+        left: 50%;
+        transform: translate(-50%, -50%); /* Menggeser video ke tengah */
+        border-radius: 20px; /* Menentukan pinggiran video */
+        animation: fadein 2s; /* Animasi fade in */
+        border: 5px solid white; /* Menambahkan border putih */
+    }
+    @keyframes fadein {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    /* Animasi debu */
+    @keyframes dust {
+        0% {
+            transform: translateY(100vh) rotate(0deg) scale(0.5);
+            opacity: 0.5;
+        }
+        50% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-100vh) rotate(360deg) scale(0.5);
+            opacity: 0;
+        }
+    }
+
+    .dust-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    .dust {
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        background-color: #fff;
+        opacity: 0.5;
+        border-radius: 50%;
+        animation: dust 15s linear infinite;
+    }
+
+    /* Tombol styling */
+    .button {
+        background-color: pink;
+        color: purple;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        position: fixed; /* Mengunci posisi tombol */
+        bottom: 20px; /* Menentukan posisi dari bawah */
+        left: 20px; /* Menentukan posisi dari kiri */
+        opacity: 0; /* tombol tidak terlihat secara default */
+        animation: fadeInButton 1s 2s forwards; /* animasi muncul setelah 2 detik */
+    }
+
+    /* Animasi untuk munculnya tombol */
+    @keyframes fadeInButton {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+</style>
+</head>
+<body>
+<video id="myVideo" controls>
+    <source src="turtle.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+<div id="typing-text">One last gift for u</div>
+<div class="dust-container">
+    <!-- Debu akan ditambahkan secara dinamis menggunakan JavaScript -->
+</div>
+<button class="button" onclick="window.location.href='Untitled-4.html'">Lanjutkan</button>
+
+
+<script>
+    // Fungsi untuk membuat elemen debu secara dinamis
+    function createDust() {
+        const dustContainer = document.querySelector('.dust-container');
+        const dustCount = 50; // Jumlah debu yang ingin ditampilkan
+
+        for (let i = 0; i < dustCount; i++) {
+            const dust = document.createElement("div");
+            dust.className = "dust";
+            dust.style.left = Math.random() * window.innerWidth + "px";
+            dust.style.animationDelay = Math.random() * 15 + "s"; // Menentukan keterlambatan animasi debu
+            dustContainer.appendChild(dust);
+        }
+    }
+
+    // Panggil fungsi untuk membuat debu saat halaman dimuat
+    window.onload = createDust;
+
+    const video = document.getElementById("myVideo");
+
+    video.addEventListener("ended", function() {
+        this.pause();
+    });
+</script>
+
+</body>
+</html>
